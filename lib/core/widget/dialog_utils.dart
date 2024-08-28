@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../resources/color_manager.dart';
+
 class DialogUtils {
   static void showLoading(
       {required BuildContext context, required String message}) {
@@ -8,12 +10,21 @@ class DialogUtils {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: ColorManager.primary,
             content: Row(
               children: [
-                CircularProgressIndicator(),
+                CircularProgressIndicator(
+                  color: ColorManager.white,
+                ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(message),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    message,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(color: ColorManager.white),
+                  ),
                 )
               ],
             ),
@@ -43,7 +54,13 @@ class DialogUtils {
             // }
             posAction?.call();
           },
-          child: Text(posActionName)));
+          child: Text(
+            posActionName,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: ColorManager.white),
+          )));
     }
     if (negActionName != null) {
       actions.add(TextButton(
@@ -51,16 +68,30 @@ class DialogUtils {
             Navigator.pop(context);
             negAction?.call();
           },
-          child: Text(negActionName)));
+          child: Text(
+            negActionName,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: ColorManager.white),
+          )));
     }
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text(message),
+            backgroundColor: ColorManager.primary,
+            content: Text(message,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: ColorManager.white)),
             title: Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: ColorManager.white),
             ),
             actions: actions,
           );
