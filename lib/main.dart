@@ -5,10 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/my_bloc_observer.dart';
 import 'core/routes_manager/route_generator.dart';
 import 'core/routes_manager/routes.dart';
-
+import 'domain/di/di.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
+  configureDependencies();
   runApp(const MainApp());
 }
 
