@@ -33,15 +33,6 @@ class ProfileTabState extends State<ProfileTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset(
-                SvgAssets.routeLogo,
-                height: AppSize.s40,
-                colorFilter: ColorFilter.mode(
-                  ColorManager.primary,
-                  BlendMode.srcIn,
-                ),
-              ),
-              SizedBox(height: AppSize.s20.h),
               Text(
                 'Welcome, Mohamed',
                 style: getSemiBoldStyle(

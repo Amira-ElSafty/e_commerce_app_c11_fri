@@ -6,7 +6,6 @@ import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/styles_manager.dart';
 import '../../../core/resources/values_manager.dart';
 import '../../../core/routes_manager/routes.dart';
-import '../../../core/widget/product_counter.dart';
 import 'color_and_size_cart_item.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -35,14 +34,13 @@ class CartItemWidget extends StatelessWidget {
   final void Function(int value) onDecrementTap;
   @override
   Widget build(BuildContext context) {
-    bool isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    // bool isPortrait =
+    //     MediaQuery.of(context).orientation == Orientation.portrait;
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productDetails),
       child: Container(
-        height: isPortrait ? height * 0.14 : width * 0.23,
+        width: 398.w,
+        height: 140.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           border: Border.all(color: ColorManager.primary.withOpacity(0.3)),
@@ -58,8 +56,8 @@ class CartItemWidget extends StatelessWidget {
             child: Image.asset(
               imagePath,
               fit: BoxFit.cover,
-              height: isPortrait ? height * 0.142 : height * 0.23,
-              width: isPortrait ? width * 0.29 : 165.w,
+              height: 140.h,
+              width: 120.w,
             ),
           ),
           // SizedBox(width: 8.w),
@@ -122,11 +120,48 @@ class CartItemWidget extends StatelessWidget {
                               fontSize: AppSize.s18.sp),
                         ),
                       ),
-                      ProductCounter(
-                        add: onIncrementTap,
-                        productCounter: quantity,
-                        remove: onDecrementTap,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: ColorManager.primary,
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w,
+                            vertical: 7.h),
+                        child: Row(
+                          children: [
+                            InkWell(
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.remove_circle_outline,
+                                  size: 20.w,
+                                  color: ColorManager.white,
+                                )),
+                            SizedBox(
+                              width: 18.w,
+                            ),
+                            Text(
+                              '1',
+                              style: getMediumStyle(color: ColorManager.white)
+                                  .copyWith(fontSize: 18.sp),
+                            ),
+                            SizedBox(
+                              width: 18.w,
+                            ),
+                            InkWell(
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.add_circle_outline,
+                                  color: ColorManager.white,
+                                  size: 20.w,
+                                )),
+                          ],
+                        ),
                       )
+                      // ProductCounter(
+                      //   add: onIncrementTap,
+                      //   productCounter: quantity,
+                      //   remove: onDecrementTap,
+                      // )
                     ],
                   ),
                 ],

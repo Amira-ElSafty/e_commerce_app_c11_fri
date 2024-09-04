@@ -5,12 +5,10 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/widget/custom_elevated_button.dart';
-import '../widgets/product_color.dart';
 import '../widgets/product_description.dart';
 import '../widgets/product_item.dart';
 import '../widgets/product_label.dart';
 import '../widgets/product_rating.dart';
-import '../widgets/product_size.dart';
 import '../widgets/product_slider.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -20,7 +18,10 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         centerTitle: true,
+        iconTheme: IconThemeData(color: ColorManager.primaryDark),
         title: Text(
           'Product Details',
           style: getMediumStyle(color: ColorManager.appBarTitleColor)
@@ -45,7 +46,7 @@ class ProductDetails extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 50.h),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const ProductSlider(items: [
               ProductItem(
                 imageUrl:
@@ -76,22 +77,6 @@ class ProductDetails extends StatelessWidget {
             const ProductDescription(
                 productDescription:
                     'Nike is a multinational corporation that designs, develops, and sells athletic footwear ,apparel, and accessories'),
-            ProductSize(
-              size: const [35, 38, 39, 40],
-              onSelected: () {},
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Text('Color',
-                style: getMediumStyle(color: ColorManager.appBarTitleColor)
-                    .copyWith(fontSize: 18.sp)),
-            ProductColor(color: const [
-              Colors.red,
-              Colors.blueAccent,
-              Colors.green,
-              Colors.yellow,
-            ], onSelected: () {}),
             SizedBox(
               height: 48.h,
             ),

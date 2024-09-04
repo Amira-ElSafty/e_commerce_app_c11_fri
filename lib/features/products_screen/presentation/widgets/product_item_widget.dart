@@ -6,9 +6,8 @@ import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/routes_manager/routes.dart';
 import '../../../../core/widget/heart_button.dart';
 
-class CustomProductWidget extends StatelessWidget {
-  final double width;
-  final double height;
+class ProductItemWidget extends StatelessWidget {
+  //todo: product
   final String image;
   final String title;
   final String description;
@@ -16,10 +15,8 @@ class CustomProductWidget extends StatelessWidget {
   final double discountPercentage;
   final double rating;
 
-  const CustomProductWidget({
+  const ProductItemWidget({
     super.key,
-    required this.width,
-    required this.height,
     required this.image,
     required this.title,
     required this.description,
@@ -51,12 +48,12 @@ class CustomProductWidget extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productDetails),
       child: Container(
-        width: width * 0.4,
-        height: height * 0.3,
+        width: 191.w,
+        height: 237.h,
         decoration: BoxDecoration(
           border: Border.all(
             color: ColorManager.primary.withOpacity(0.3),
-            width: 2,
+            width: 2.w,
           ),
           borderRadius: BorderRadius.circular(16.r),
         ),
@@ -68,8 +65,6 @@ class CustomProductWidget extends StatelessWidget {
               child: Stack(
                 alignment: AlignmentDirectional.center,
                 children: [
-                  // Not working with the lastest flutter version
-
                   // CachedNetworkImage(
                   //   imageUrl: image,
                   //   height: height * 0.15,
@@ -89,20 +84,18 @@ class CustomProductWidget extends StatelessWidget {
                     child: Image.asset(
                       image,
                       fit: BoxFit.cover,
-                      width: width,
+                      width: double.infinity,
                     ),
                   ),
                   Positioned(
-                      top: height * 0.01,
-                      right: width * 0.02,
-                      child: HeartButton(onTap: () {})),
+                      top: 8.h, right: 8.w, child: HeartButton(onTap: () {})),
                 ],
               ),
             ),
             Expanded(
               flex: 5,
               child: Padding(
-                padding: const EdgeInsets.all(4),
+                padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -113,7 +106,7 @@ class CustomProductWidget extends StatelessWidget {
                         fontSize: 14.sp,
                       ),
                     ),
-                    SizedBox(height: height * 0.002),
+                    SizedBox(height: 2.h),
                     Text(
                       truncateDescription(description),
                       style: getRegularStyle(
@@ -121,24 +114,12 @@ class CustomProductWidget extends StatelessWidget {
                         fontSize: 14.sp,
                       ),
                     ),
-                    SizedBox(height: height * 0.01),
-                    SizedBox(
-                      width: width * 0.3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "EGP $price",
-                            style: getRegularStyle(
-                              color: ColorManager.textColor,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          Text(
-                            "$discountPercentage %",
-                            style: getTextWithLine(),
-                          ),
-                        ],
+                    SizedBox(height: 2.h),
+                    Text(
+                      "EGP $price",
+                      style: getRegularStyle(
+                        color: ColorManager.textColor,
+                        fontSize: 14.sp,
                       ),
                     ),
                     // SizedBox(height: height * 0.005),
@@ -170,8 +151,8 @@ class CustomProductWidget extends StatelessWidget {
                           child: InkWell(
                             onTap: () {},
                             child: Container(
-                              height: height * 0.036,
-                              width: width * 0.08,
+                              height: 30.h,
+                              width: 30.w,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: ColorManager.primary,

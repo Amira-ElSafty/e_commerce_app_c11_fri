@@ -15,11 +15,14 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: ColorManager.primaryDark),
         title: Text(
           'Cart',
           style: getMediumStyle(fontSize: 20, color: ColorManager.textColor),
         ),
-        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
