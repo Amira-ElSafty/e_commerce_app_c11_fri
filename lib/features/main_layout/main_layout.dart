@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_e_commerece_c11_fri/features/main_layout/cubit/home_states.dart';
+import 'package:flutter_e_commerece_c11_fri/features/main_layout/cubit/home_view_model.dart';
 
 import '../../core/resources/assets_manager.dart';
 import '../../core/resources/color_manager.dart';
-import '../../core/widget/home_screen_app_bar.dart';
-import 'categories/presentation/categories_tab.dart';
-import 'favourite/presentation/favourite_screen.dart';
-import 'home/presentation/home_tab.dart';
-import 'profile_tab/presentation/profile_tab.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -16,50 +14,45 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  int currentIndex = 0;
-  List<Widget> tabs = [
-    const HomeTab(),
-    const CategoriesTab(),
-    const FavouriteScreen(),
-    const ProfileTab(),
-  ];
+  HomeViewModel viewModel = HomeViewModel();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const HomeScreenAppBar(),
-      extendBody: false,
-      body: tabs[currentIndex],
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
-          child: BottomNavigationBar(
-            currentIndex: currentIndex,
-            onTap: (value) => changeSelectedIndex(value),
-            backgroundColor: ColorManager.primary,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: ColorManager.primary,
-            unselectedItemColor: ColorManager.white,
-            showSelectedLabels: false, // Hide selected item labels
-            showUnselectedLabels: false, // Hide unselected item labels
-            items: [
-              // Build BottomNavigationBarItem widgets for each tab
-              CustomBottomNavBarItem(IconsAssets.icHome, "Home"),
-              CustomBottomNavBarItem(IconsAssets.icCategory, "Category"),
-              CustomBottomNavBarItem(IconsAssets.icWithList, "WishList"),
-              CustomBottomNavBarItem(IconsAssets.icProfile, "Profile"),
-            ],
+    return BlocBuilder<HomeViewModel, HomeStates>(
+      bloc: viewModel,
+      builder: (context, state) {
+        return Scaffold(
+          extendBody: false,
+          body: viewModel.tabs[viewModel.currentIndex],
+          bottomNavigationBar: ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+              child: BottomNavigationBar(
+                currentIndex: viewModel.currentIndex,
+                onTap: (value) => viewModel.changeSelectedIndex(value),
+                backgroundColor: ColorManager.primary,
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: ColorManager.primary,
+                unselectedItemColor: ColorManager.white,
+                showSelectedLabels: false,
+                // Hide selected item labels
+                showUnselectedLabels: false,
+                // Hide unselected item labels
+                items: [
+                  // Build BottomNavigationBarItem widgets for each tab
+                  CustomBottomNavBarItem(IconsAssets.icHome, "Home"),
+                  CustomBottomNavBarItem(IconsAssets.icCategory, "Category"),
+                  CustomBottomNavBarItem(IconsAssets.icWithList, "WishList"),
+                  CustomBottomNavBarItem(IconsAssets.icProfile, "Profile"),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
-  }
-
-  changeSelectedIndex(int selectedIndex) {
-    setState(() {
-      currentIndex = selectedIndex;
-    });
   }
 }
 

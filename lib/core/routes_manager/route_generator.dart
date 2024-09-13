@@ -4,7 +4,6 @@ import 'package:flutter_e_commerece_c11_fri/features/auth/presentation/screens/r
 
 import '../../features/cart/screens/cart_screen.dart';
 import '../../features/main_layout/main_layout.dart';
-import '../../features/product_details/presentation/screen/product_details.dart';
 import '../../features/products_screen/presentation/screens/products_screen.dart';
 import '../../features/splash/splash_screen.dart';
 import 'routes.dart';
@@ -15,16 +14,16 @@ class RouteGenerator {
       case Routes.cartRoute:
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case Routes.mainRoute:
-        return MaterialPageRoute(builder: (_) => const MainLayout());
+        return MaterialPageRoute(builder: (_) => MainLayout());
 
       case Routes.productsScreenRoute:
-        return MaterialPageRoute(builder: (_) => const ProductsScreen());
+        return MaterialPageRoute(builder: (_) => ProductsScreen());
 
-      case Routes.productDetails:
-        return MaterialPageRoute(builder: (_) => const ProductDetails());
+      // case Routes.productDetails:
+      //   return MaterialPageRoute(builder: (_) =>  ProductDetails());
 
       case Routes.signInRoute:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (_) => LoginScreen());
 
       case Routes.splashScreenRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());

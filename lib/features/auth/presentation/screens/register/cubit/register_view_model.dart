@@ -13,6 +13,7 @@ class RegisterViewModel extends Cubit<RegisterStates> {
   var passwordController = TextEditingController(text: 'Amira123');
   var rePasswordController = TextEditingController(text: 'Amira123');
   var phoneController = TextEditingController(text: '01232323232');
+  var formKey = GlobalKey<FormState>();
 
   RegisterViewModel({required this.registerUseCase})
       : super(RegisterInitialState());
@@ -20,17 +21,19 @@ class RegisterViewModel extends Cubit<RegisterStates> {
   //todo: hold data - handle logic
 
   void register() async {
-    emit(RegisterLoadingState());
-    var either = await registerUseCase.invoke(
-        nameController.text,
-        emailController.text,
-        phoneController.text,
-        passwordController.text,
-        rePasswordController.text);
-    either.fold((error) {
-      emit(RegisterErrorState(failures: error));
-    }, (response) {
-      emit(RegisterSuccessState(responseEntity: response));
-    });
+    if (formKey.currentState?.validate() == true) {
+      emit(RegisterLoadingState());
+      var either = await registerUseCase.invoke(
+          nameController.text,
+          emailController.text,
+          phoneController.text,
+          passwordController.text,
+          rePasswordController.text);
+      either.fold((error) {
+        emit(RegisterErrorState(failures: error));
+      }, (response) {
+        emit(RegisterSuccessState(responseEntity: response));
+      });
+    }
   }
 }
